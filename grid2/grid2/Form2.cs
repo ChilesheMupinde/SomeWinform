@@ -9,9 +9,15 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace grid2
-{
-    public partial class Form2 : Form
+{  
+     public partial class Form2 : Form
     {
+        public static string name;
+        public string level;
+        public static bool easy;
+        public static bool medium;
+        public static bool hard;
+        public static int guess;
         public Form2()
         {
             InitializeComponent();
@@ -21,13 +27,52 @@ namespace grid2
         {
 
         }
-        public string name;
-        public string level;
+        
         private void Form2_Load(object sender, EventArgs e)
         {
-            name = Name1.Text;
-            level = Level1.Text;
             
+            
+
+
+
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+
+            
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            
+            name = Name1.Text;
+            easy = true;
+            new GridForm().Show();
+            
+            
+            
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            name = Name1.Text;
+            medium = true;
+            new GridForm().Show();
+            
+            
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            name = Name1.Text;
+            hard = true;
+            new GridForm().Show();
+         
+        }
+
+        private void Name1_TextChanged(object sender, EventArgs e)
+        {
 
         }
     }
