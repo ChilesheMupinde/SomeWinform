@@ -16,43 +16,99 @@ namespace grid2
         {
             InitializeComponent();
         }
-        DataTable cel = new DataTable();
+
+
+        //declarations
         public int GuessCount;
-        public int guessnumber;
-        public int guessinput = 0;
-        public bool search;
-        public int found = 0;
-        public int searchrow;
-        public int searcholumn;
-        public bool treasure;
+        public int guess;
+        string text1;
+
+        public bool treasure ;
         public bool GameOver;
+        public bool easy = Form2.easy;
+        int[] av = new int[70];
+        
+        Button[] seper = new Button[60];
+ 
+        
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            //columns
-            cel.Columns.Add("0", typeof(int));
-            cel.Columns.Add("1", typeof(int));
-            cel.Columns.Add("2", typeof(int));
-            cel.Columns.Add("3", typeof(int));
-            cel.Columns.Add("4", typeof(int));
-            cel.Columns.Add("5", typeof(int));
-            cel.Columns.Add("6", typeof(int));
-            cel.Columns.Add("7", typeof(int));
-            cel.Columns.Add("8", typeof(int));
-            cel.Columns.Add("9", typeof(int));
+            Random rand = new Random();           
+            int treasurenum = rand.Next(1, 70);
+            text1 = Guessbox.Text;
+            
+            
 
-            //rows
-            cel.Rows.Add(00, 10, 20, 30, 40, 50, 60, 70, 80, 90);
-            cel.Rows.Add(01, 11, 21, 31, 41, 51, 61, 71, 81, 91);
-            cel.Rows.Add(02, 12, 22, 32, 42, 52, 62, 72, 82, 92);
-            cel.Rows.Add(03, 13, 23, 33, 43, 53, 63, 73, 83, 93);
-            cel.Rows.Add(04, 14, 24, 34, 44, 54, 64, 74, 84, 94);
-            cel.Rows.Add(05, 15, 25, 35, 45, 55, 65, 75, 85, 95);
-            cel.Rows.Add(06, 16, 26, 36, 46, 56, 66, 76, 86, 96);
-            cel.Rows.Add(07, 17, 27, 37, 47, 57, 67, 77, 87, 97);
+            //Grid
+            for (int b= 1;b<=70;b++)
+            {
+                Button but = new Button();
+                
 
-            //Integrating data table into datagrid
-            dataGridView1.DataSource = cel;///
+                if (text1 != "")
+                {
+                    guess = int.Parse(text1);
+                }
+
+
+                but.Location = new System.Drawing.Point(3, 3);
+                but.Name = "btn" + b.ToString();
+                but.Size = new System.Drawing.Size(57, 32);
+                but.TabIndex = 0;
+                but.UseVisualStyleBackColor = true;
+                if (treasurenum == b && treasure && guess == treasurenum)
+                {
+                    but.Tag = true;
+                    but.BackColor = Color.Green;
+                }
+
+
+                else if(treasurenum != b && treasure && guess != treasurenum){
+                    but.Tag = false;
+                    but.BackColor = Color.Red;
+                }
+                label2.Text = treasure.ToString();
+
+                but.Click += But_Click;
+
+                flowLayoutPanel1.Controls.Add(but);
+            }
+            
+            
+           
+            
+        }
+
+        private void But_Click(object sender, EventArgs e)
+        {
+            Button but = (Button)sender;
+            bool tag = (bool)but.Tag;
+
+            if (tag)
+            {
+                but.BackColor = Color.Green;
+            }
+            else
+            {
+                but.BackColor = Color.Red;
+            }
+        }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            treasure = true;
+            Guessbox.Text = "";
         }
     }
 }
